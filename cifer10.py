@@ -102,7 +102,6 @@ if __name__ == '__main__':
 
     if torch.cuda.device_count() > 1:
         print("Let's use", torch.cuda.device_count(), "GPUs!")
-        # dim = 0 [30, xxx] -> [10, ...], [10, ...], [10, ...] on 3 GPUs
         cifer10Net = nn.DataParallel(cifer10Net)
 
     cifer10Net.to(device)
@@ -131,8 +130,7 @@ if __name__ == '__main__':
 
     start = time.time()
 
-    for epoch in range(20):  # loop over the dataset multiple times
-
+    for epoch in range(20):  
         running_loss = 0.0
         for i, data in enumerate(trainloader, 0):
             # get the inputs
@@ -163,6 +161,7 @@ if __name__ == '__main__':
     class_total = list(0. for i in range(10))
 
     with torch.no_grad():
+        cifer10Net.eval()
         for data in testloader:
             inputs, labels = data
             inputs, labels = inputs.to("cuda:0"), labels.to("cuda:0")
