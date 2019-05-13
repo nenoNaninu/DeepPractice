@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "dcgan.py", line 119, in <module>
+    transforms.ToTensor(),
+  File "/home/yanai-lab/naritomi-s/conda_env/pytorch04/lib/python3.6/site-packages/torchvision/datasets/folder.py", line 178, in __init__
+    target_transform=target_transform)
+  File "/home/yanai-lab/naritomi-s/conda_env/pytorch04/lib/python3.6/site-packages/torchvision/datasets/folder.py", line 75, in __init__
+    classes, class_to_idx = find_classes(root)
+  File "/home/yanai-lab/naritomi-s/conda_env/pytorch04/lib/python3.6/site-packages/torchvision/datasets/folder.py", line 23, in find_classes
+    classes = [d for d in os.listdir(dir) if os.path.isdir(os.path.join(dir, d))]
+FileNotFoundError: [Errno 2] No such file or directory: '~/export_dataset/UECFOOD/UECFOOD100/'
