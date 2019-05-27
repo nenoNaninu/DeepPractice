@@ -76,6 +76,8 @@ if __name__ == "__main__":
                 num = inputs.shape[0]
                 output = vgg_model(inputs)
                 output = output.detach().cpu().numpy()
+                norm = np.linalg.norm(output, ord=2, axis=1).reshape((-1, 1))
+                output = output / norm
                 if 4096 <= idx + num:
                     diff = 4096 - idx
                     feature_buffer[idx:idx + num, :] = output[0:diff]
