@@ -85,19 +85,27 @@ if __name__ == "__main__":
     print("extructe feature")
     label_buffer = label_buffer[:4096]
 
-    print("original")
+    print("===original====")
     KMeans_cluster(feature_buffer, label_buffer, 10)
 
+    print("===originalx0.95 pca===")
+    pca = PCA(n_components=int(4096 * 0.95))
+    pca.fit(feature_buffer)
+    transformed = pca.fit_transform(feature_buffer[:4096])
+    label_buffer = label_buffer[0:transformed.shape[0]]
+
+    KMeans_cluster(transformed, label_buffer, 10)
+
+    print("===originalx0.9 pca===")
+    pca = PCA(n_components=int(4096 * 0.9))
+    pca.fit(feature_buffer)
+    transformed = pca.fit_transform(feature_buffer[:4096])
+    label_buffer = label_buffer[0:transformed.shape[0]]
+    KMeans_cluster(transformed, label_buffer, 10)
+
+    print("===128 pca===")
     pca = PCA(n_components=128)
     pca.fit(feature_buffer)
     transformed = pca.fit_transform(feature_buffer[:1500])
     label_buffer = label_buffer[0:transformed.shape[0]]
-
-    print("128 pca")
     KMeans_cluster(transformed, label_buffer, 10)
-
-    # pca128 = PCA(n_components=128)
-    # pca.fit(feature_buffer)
-    # transformed = pca.fit_transform(feature_buffer)
-    # print(transformed)
-    # print(transformed.shape)
